@@ -5,18 +5,18 @@ Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei num
 
 
 
-generateFiveNumbers();
 
 //crea un array vuoto
 //crea un ciclo for da 1 a 5 
 // - crea una variabile per numeri random da 1 a 100
-// - pusha i numeri random nell'array
-// stampa 5 numeri dell array nel dom
+// - pusha i 5 numeri random nell'array
+// stampa array nel dom
 
 /**
  * Description: this function generate 5 random numbers and print them on DOM
  * @returns void
  */
+generateFiveNumbers();
 function generateFiveNumbers() {
     fiveNumbers = [];
     for (let i=0; i<5; i++) {
@@ -34,14 +34,12 @@ function generateFiveNumbers() {
 
 // crea un timer di 30 secondi che parte appena si visualizza la pagina
 // - creare una variabile seconds
-const seconds = 5 * 1000;
-
+const seconds = 30 * 1000;
 // -fai partire il timer
 setTimeout(hidNumbers, seconds);;
 
-// - creare una funzione che ti dirà cosa succede dopo i 30 secondi 
-//     + scompare l'array in html
-
+// - creare una funzione che dopo 30 secondi
+//     + fa scomparire l'array in html
 /**
  * Description: this function hid the numbers on DOM
  * @returns void
@@ -51,9 +49,9 @@ function hidNumbers () {
     numbers.classList.add('hidden');
 }
 
-//     + 5 prompt, un secondo di ritardo rispetto a writeNumbers() per non mostrare i numeri dietro
+setTimeout(askNumbers, 31 * 1000);
 
-setTimeout(askNumbers, 6000);
+//     funzione che chiede 5 prompt, un secondo di ritardo rispetto a hidNumbers() per non mostrare i numeri dietro durante i prompt
 
 /**
  * Description: this function ask five prompts to ask numbers. then print on dom which number the user guessed
@@ -61,24 +59,22 @@ setTimeout(askNumbers, 6000);
  */
 
 function askNumbers() {
+    let choice;
+    const guessedNumber = [];
     for (let i = 0; i < 5; i++) {
         // chiedi 5 prompt
         const userNumbers = parseInt(prompt('scrivi un numero'));
-        // se il numero scritto è presente nel dom 
-        // - true
-        // - stampa in dom
-        // altrimenti
-        // - il numero non viene stampato
+        // se il numero scritto è presente nell'array fiveNumbers allora:
+        // - pusha nell'array guessedNumbers
         if (userNumbers === fiveNumbers[i]) {  
-            let choice = true;
-            console.log(choice);
-        } else {
-            let choice = false;
-            console.log(choice);
+            guessedNumber.push(fiveNumbers[i])
         }
     }
+    // stampa risultato finale
+    //software dice quanti numeri hai indovinato e quali
+    let result = document.getElementById('result');
+    result.innerHTML = `hai indovinato i numeri ${guessedNumber} vale a dire ${guessedNumber.length} su 5`;
 }
 
-//software dice quanti numeri hai indovinato e quali
 
 
